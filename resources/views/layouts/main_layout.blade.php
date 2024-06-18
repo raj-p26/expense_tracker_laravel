@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -21,10 +23,10 @@
             <a class="nav-link active" aria-current="page" href="/">Overview</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('/') }}/expenses">Expenses</a>
+            <a class="nav-link" href="{{ route('user.incomes') }}">Expenses</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('/') }}/incomes">Incomes</a>
+            <a class="nav-link" href="{{ route('user.incomes') }}">Incomes</a>
           </li>
         </ul>
         <div class="d-flex align-items-center justify-content-between">
@@ -62,8 +64,8 @@
           <form class="row g-3 needs-validation" novalidate method="post" action="{{ route('user.login') }}">
             @csrf
             <div class="mb-3">
-              <label for="validationCustomEmail" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="validationCustomEmail" name="userEmail" required />
+              <label for="userEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="userEmail" name="userEmail" required />
               <div class="invalid-feedback">
                 Please Enter a valid Email.
               </div>
@@ -126,7 +128,9 @@
   </div>
 
   <main>
-    @yield('main_section')
+    <div class="container">
+      @yield('main_section')
+    </div>
   </main>
 </body>
 
