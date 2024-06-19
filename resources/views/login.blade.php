@@ -104,6 +104,9 @@
                 <p class="text-danger">{{ session()->get('error') }}</p>
               </div>
               @endif
+              <div>
+                <a href="{{ route('user.login') }}">Login?</a>
+              </div>
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>

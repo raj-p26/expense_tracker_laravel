@@ -30,13 +30,13 @@ class LoginController extends Controller
         $user->password = $password;
         try {
             $user->save();
-            session()->put(['username' => $name]);
+            session()->put(['username' => $name, 'id' => $user->user_id]);
 
             return redirect('/');
-        } catch (Exception $e) {
-            session()->put(['error' => $e->getMessage()]);
-
-            return redirect()->back();
+        } catch (Exception) {
+            return redirect()
+                ->back()
+                ->with(['error' => 'Account with this email already exists.']);
         }
     }
 
@@ -53,11 +53,30 @@ class LoginController extends Controller
         ])->first();
 
         if ($user == null) {
-            return redirect()->back()->with(['error' => "Invalid Credentials."]);
+            return redirect()
+                ->back()
+                ->with(['error' => "Invalid Credentials."]);
         }
 
-        session()->put(['username' => $user->name]);
+        session()->put(['username' => $user->name, 'id' => $user->user_id]);
         return redirect('/');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::where([
+            'user_id' => $id,
+        ])->first();
+
+        if ($user == null) return redirect('/err');
+
+        User::where([
+            'user_id' => $id,
+        ])->delete();
+
+        session()->forget(['username', 'id']);
+
+        return redirect('/login');
     }
 
     public function register()
