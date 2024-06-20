@@ -12,15 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('expenses', function (Blueprint $table) {
-            $table->id('expense_id');
-            $table->integer('expense_amount');
-            $table->string('expense_type');
+            $table->id();
+            $table->integer('amount');
+            $table->string('type_');
             $table->string('description');
+            $table->date('date_');
             $table->unsignedBigInteger('user_id');
             $table
                 ->foreign('user_id')
                 ->references('user_id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

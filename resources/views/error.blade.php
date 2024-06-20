@@ -12,9 +12,27 @@
 <body>
   <div class="container d-flex justify-content-center align-items-center h-100" style="min-height: 100vh;">
     <div>
-      <h1 class="h1 text-center">404</h1>
-      <h3>Not Found</h3>
-      <a class="btn btn-primary mt-3" href="{{ url('/') }}">Back To Home</a>
+      <h1 class="h1 text-center">
+        @if(session()->has('error_code'))
+        {{ session()->get('error_code') }}
+        @elseif (isset($error_code))
+        {{ $error_code }}
+        @else
+        404
+        @endif
+      </h1>
+      <h3>
+        @if (session()->has('error_message'))
+        {{ session()->get('error_message') }}
+        @elseif (isset($error_message))
+        {{ $error_message }}
+        @else
+        Not Found
+        @endif
+      </h3>
+      <div class="d-flex justify-content-center">
+        <a class="btn btn-primary mt-3" href="{{ url('/') }}">Back To Home</a>
+      </div>
     </div>
   </div>
 </body>

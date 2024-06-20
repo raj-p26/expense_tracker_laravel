@@ -68,11 +68,12 @@ class LoginController extends Controller
             'user_id' => $id,
         ])->first();
 
-        if ($user == null) return redirect('/err');
+        if ($user == null) return redirect('/err')->with([
+            'error_code' => 404,
+            'error_message' => "Not Found",
+        ]);
 
-        User::where([
-            'user_id' => $id,
-        ])->delete();
+        User::where(['user_id' => $id])->delete();
 
         session()->forget(['username', 'id']);
 

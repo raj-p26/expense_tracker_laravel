@@ -12,15 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('incomes', function (Blueprint $table) {
-            $table->id('income_id');
-            $table->integer('income_amount');
-            $table->string('income_type');
+            $table->id();
+            $table->integer('amount');
+            $table->string('type_');
             $table->string('description')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->date('date_');
             $table
                 ->foreign('user_id')
                 ->references('user_id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -10,13 +10,31 @@ class EditBookKeepingModal extends Component
 {
     public $id;
     public $type;
+    public $bookKeepingType;
+    public $bookKeepingAmount;
+    public $bookKeepingDescription;
+    public $bookKeepingDate;
+    public $editMode;
+
     /**
      * Create a new component instance.
      */
-    public function __construct($type, $id)
-    {
+    public function __construct(
+        $type,
+        $id,
+        $bookKeepingAmount = "",
+        $bookKeepingDate = "",
+        $bookKeepingDescription = "",
+        $bookKeepingType = "",
+        $editMode = false,
+    ) {
         $this->id = $id;
         $this->type = $type;
+        $this->bookKeepingAmount = $bookKeepingAmount;
+        $this->bookKeepingDate = $bookKeepingDate;
+        $this->bookKeepingDescription = $bookKeepingDescription;
+        $this->bookKeepingType = $bookKeepingType;
+        $this->editMode = $editMode;
     }
 
     /**
